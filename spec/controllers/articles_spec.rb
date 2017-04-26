@@ -22,10 +22,20 @@ RSpec.describe ArticlesController do
   end
 
   describe 'GET index' do
-    skip 'is succesful' do
+    before(:each) do
+      get :index
+    end
+    it 'is successful' do
+      expect(get(:index)).to be_success
     end
 
-    skip 'renders a JSON response' do
+    it 'renders a JSON response' do
+      # setup
+      articles_collection = JSON.parse(response.body)
+      # action
+      # assert
+      expect(articles_collection).not_to be_nil
+      expect(articles_collection.first['title']).to eq(article['title'])
     end
   end
 
