@@ -40,10 +40,19 @@ RSpec.describe ArticlesController do
   end
 
   describe 'GET show' do
-    skip 'is successful' do
+    before(:each) do
+      get :show, params: { id: article.id }
+    end
+    it 'is successful' do
+      expect(response).to be_success
     end
 
-    skip 'renders a JSON response' do
+    it 'renders a JSON response' do
+      article_collection = JSON.parse(response.body)
+      # action
+      # assert
+      expect(article_collection).not_to be_nil
+      expect(article_collection['title']).to eq(article['title'])
     end
   end
 

@@ -4,11 +4,13 @@ class ArticlesController < ApplicationController
   before_filter :set_article, only: [:show, :update, :destroy]
 
   def index
-#    JSON.parse({:name => 'Dee Dee'})
+#   JSON.parse({:name => 'Dee Dee'})
     render json: Article.all
   end
 
   def show
+    # JSON.parse({:name => 'Dee Dee'})
+    render json: @article
   end
 
   def destroy
