@@ -49,15 +49,18 @@ RSpec.describe ArticlesController do
 
     it 'renders a JSON response' do
       article_collection = JSON.parse(response.body)
-      # action
-      # assert
       expect(article_collection).not_to be_nil
       expect(article_collection['title']).to eq(article['title'])
     end
   end
 
   describe 'DELETE destroy' do
-    skip 'is successful and returns an empty response' do
+    before(:each) do
+      delete :destroy, params: { id: article.id }
+    end
+    it 'is successful and returns an empty response' do
+      expect(response).to be_successful
+      expect(response.body).to be_empty
     end
   end
 
@@ -67,14 +70,18 @@ RSpec.describe ArticlesController do
     end
 
     before(:each) do
-      patch :update, id: article.id,
-                     params: { article: article_diff }
+      patch :update, params: { id: article.id, article: article_diff }
     end
 
-    skip 'is successful' do
+    it 'is successful' do
+      expect(response).to be_success
     end
 
-    skip 'renders a JSON response' do
+    it 'renders an empty response' do
+  #    article_response = JSON.parse(response.body)
+  #    expect(article_response).not_to be_nil
+  #    expect(article_response[:title]).to eq(article_diff[:title])
+      expect(response.body).to be_empty
     end
   end
 

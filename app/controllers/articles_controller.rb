@@ -14,9 +14,15 @@ class ArticlesController < ApplicationController
   end
 
   def destroy
+    @article.destroy
+    head :no_content
   end
 
   def update
+    @article.update(article_params)
+    head :no_content
+  else
+    render json: @article.errors, status: :unprocessable_entity
   end
 
   def create
